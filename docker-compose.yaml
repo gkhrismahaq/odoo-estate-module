@@ -3,6 +3,7 @@ services:
     container_name: odoo
     image: odoo:17.0
     env_file: .env
+    command: odoo --dev xml
     ports:
       - "8069:8069"
     volumes:
