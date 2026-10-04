@@ -1,8 +1,10 @@
 {
     "python.analysis.extraPaths": [
-        "/Users/gilangkhrismahaq/Learn/odoo_17_source"
+        "/Users/gilangkhrismahaq/Learn/odoo_17_source",
+        "/Users/gilangkhrismahaq/Library/Python/3.9/lib/python/site-packages"
     ],
     "python.autoComplete.extraPaths": [
-        "/Users/gilangkhrismahaq/Learn/odoo_17_source"
+        "/Users/gilangkhrismahaq/Learn/odoo_17_source",
+        "/Users/gilangkhrismahaq/Library/Python/3.9/lib/python/site-packages"
     ]
 }
