@@ -41,7 +41,7 @@ logs:
 	$(call log_target,$(word 2,$(MAKECMDGOALS)))
 
 define upgrade_addon
-	$(DOCKER) exec -it $(CONTAINER_ODOO) odoo -d $(WEB_DB_NAME) -r $(DB_USER) -w $(DB_PASSWORD) -u $(1)
+	$(DOCKER) exec -it $(CONTAINER_ODOO) odoo --db_host=$(CONTAINER_DB) -d $(WEB_DB_NAME) -r $(DB_USER) -w $(DB_PASSWORD) -u $(1)
 endef
 
 addon: restart
