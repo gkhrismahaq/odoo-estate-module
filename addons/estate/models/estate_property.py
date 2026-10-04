@@ -28,7 +28,7 @@ class EstateProperty(models.Model):
         default='north'
     )
     active = fields.Boolean(string="Aktif", default=False)
-    statrus = fields.Selection(
+    status = fields.Selection(
         selection=[
             ('new', 'Baru'),
             ('offer_received', 'Penawaran Diterima'),
