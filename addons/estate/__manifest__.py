@@ -7,7 +7,9 @@
     'author': "Gilang Khrismahaq",
     'description': "Manage real estate properties, including buildings, apartments, and tenants.",
     'description_text': "Manage real estate properties, including buildings, apartments, and tenants.",
-    'data': [],
+    'data': [
+        'security/ir.model.access.csv',    
+    ],
     'demo': [],
     'installable': True,
     'application': True
