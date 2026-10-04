@@ -1,4 +1,5 @@
 from odoo import fields, models
+from dateutil.relativedelta import relativedelta
 
 class EstateProperty(models.Model):
     _name = 'estate.property'
@@ -7,10 +8,10 @@ class EstateProperty(models.Model):
     name = fields.Char(string="Nama", required=True)
     description = fields.Text(string="Deskripsi")
     postcode = fields.Char(string="Kode Pos")
-    date_availability = fields.Date(string="Tanggal Tersedia")
+    date_availability = fields.Date(string="Tanggal Tersedia",copy=False, default=lambda self: fields.Date.today() + relativedelta(months=3))
     expected_price = fields.Float(string="Harga Harapan", required=True)
-    selling_price = fields.Float(string="Harga Jual")
-    bedrooms = fields.Integer(string="Kamar Tidur")
+    selling_price = fields.Float(string="Harga Jual", readonly=True, copy=False)
+    bedrooms = fields.Integer(string="Kamar Tidur", default=2)
     living_area = fields.Integer(string="Luas Bangunan")
     facades = fields.Integer(string="Fasad")
     garage = fields.Boolean(string="Garasi")
@@ -23,5 +24,20 @@ class EstateProperty(models.Model):
             ('north', 'Utara'),
             ('west', 'Barat'),
         ],
-        string="Orientasi Taman"
+        string="Orientasi Taman",
+        default='north'
+    )
+    active = fields.Boolean(string="Aktif", default=False)
+    statrus = fields.Selection(
+        selection=[
+            ('new', 'Baru'),
+            ('offer_received', 'Penawaran Diterima'),
+            ('offer_accepted', 'Penawaran Diterima'),
+            ('sold', 'Terjual'),
+            ('canceled', 'Dibatalkan'),
+        ],
+        string="Status",
+        required=True,
+        copy=False,
+        default='new'
     )
