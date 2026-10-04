@@ -9,6 +9,7 @@
     'description_text': "Manage real estate properties, including buildings, apartments, and tenants.",
     'data': [
         'views/estate_property_views.xml',
+        'views/estate_property_type_views.xml',
         'views/estate_menus.xml',
         'security/ir.model.access.csv',
     ],
