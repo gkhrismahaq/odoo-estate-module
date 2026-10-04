@@ -20,7 +20,8 @@
                 <field name="facades" />
                 <filter name="status" string="Ketersediaan"
                     domain="[('status', 'in', ['new', 'offer_received'])]" />
-                <filter name="group_by_postcode" string="Grup by Kode Pos" context="{'group_by':'postcode'}"/>
+                <filter name="group_by_postcode" string="Grup by Kode Pos"
+                    context="{'group_by':'postcode'}" />
             </search>
         </field>
     </record>
@@ -62,7 +63,7 @@
                         <group>
                             <field name="postcode" />
                             <field name="date_availability" />
-                            <field name="status" groups="base.group_no_one"/>
+                            <field name="status" groups="base.group_no_one" />
                         </group>
                         <group>
                             <field name="expected_price" />
