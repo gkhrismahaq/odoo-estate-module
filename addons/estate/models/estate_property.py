@@ -1,4 +1,5 @@
 from odoo import _, fields, models, api
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 
@@ -37,7 +38,7 @@ class EstateProperty(models.Model):
         selection=[
             ("new", "Baru"),
             ("offer_received", "Penawaran Diterima"),
-            ("offer_accepted", "Penawaran Diterima"),
+            ("offer_accepted", "Penawaran Disetujui"),
             ("sold", "Terjual"),
             ("canceled", "Dibatalkan"),
         ],
@@ -86,3 +87,17 @@ class EstateProperty(models.Model):
             else:
                 record.garden_area = 0
                 record.garden_orientation = False
+
+    def action_sold(self):
+        for record in self:
+            if record.status == "canceled":
+                raise UserError("Properti yang sudah dibatalkan tidak bisa terjual")
+            record.status = "sold"
+            return True
+
+    def action_cancel(self):
+        for record in self:
+            if record.status == "sold":
+                raise UserError("Properti yang sudah terjual tidak bisa dibatalkan")
+            record.status = "canceled"
+            return True
