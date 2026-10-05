@@ -79,23 +79,29 @@
                             <group>
                                 <group>
                                     <field name="bedrooms" />
-                                    <label for="living_area" />
-                                    <div class="o_row">
-                                        <field name="living_area" />
-                                        <span> m²</span>
-                                    </div>
                                     <field name="facades" />
+                                    <field name="garden_orientation" />
+                                    <field name="garage" widget="boolean_toggle" />
                                     <field name="active" widget="boolean_toggle" />
                                 </group>
                                 <group>
-                                    <field name="garage" widget="boolean_toggle" />
                                     <field name="garden" widget="boolean_toggle" />
                                     <label for="garden_area" />
                                     <div class="o_row">
                                         <field name="garden_area" />
                                         <span> m²</span>
                                     </div>
-                                    <field name="garden_orientation" />
+
+                                    <label for="living_area" />
+                                    <div class="o_row">
+                                        <field name="living_area" />
+                                        <span> m²</span>
+                                    </div>
+                                    <label for="total_area" />
+                                    <div class="o_row">
+                                        <field name="total_area" />
+                                        <span>m²</span>
+                                    </div>
                                 </group>
                             </group>
                             <separator string="Keterangan Lengkap" />
