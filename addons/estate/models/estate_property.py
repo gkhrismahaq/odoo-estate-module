@@ -1,14 +1,19 @@
-from odoo import fields, models, api
+from odoo import _, fields, models, api
 from dateutil.relativedelta import relativedelta
 
+
 class EstateProperty(models.Model):
-    _name = 'estate.property'
-    _description = 'Estate Property'
-    
+    _name = "estate.property"
+    _description = "Estate Property"
+
     name = fields.Char(string="Nama", required=True)
     description = fields.Text(string="Deskripsi")
     postcode = fields.Char(string="Kode Pos")
-    date_availability = fields.Date(string="Tanggal Tersedia",copy=False, default=lambda self: fields.Date.today() + relativedelta(months=3))
+    date_availability = fields.Date(
+        string="Tanggal Tersedia",
+        copy=False,
+        default=lambda self: fields.Date.today() + relativedelta(months=3),
+    )
     expected_price = fields.Float(string="Harga Harapan", required=True)
     selling_price = fields.Float(string="Harga Jual", readonly=True, copy=False)
     bedrooms = fields.Integer(string="Kamar Tidur", default=2)
@@ -19,41 +24,45 @@ class EstateProperty(models.Model):
     garden_area = fields.Integer(string="Luas Taman")
     garden_orientation = fields.Selection(
         selection=[
-            ('south', 'Selatan'),
-            ('east', 'Timur'),
-            ('north', 'Utara'),
-            ('west', 'Barat'),
+            ("south", "Selatan"),
+            ("east", "Timur"),
+            ("north", "Utara"),
+            ("west", "Barat"),
         ],
         string="Orientasi Taman",
-        default='north'
+        default="north",
     )
     active = fields.Boolean(string="Aktif", default=False)
     status = fields.Selection(
         selection=[
-            ('new', 'Baru'),
-            ('offer_received', 'Penawaran Diterima'),
-            ('offer_accepted', 'Penawaran Diterima'),
-            ('sold', 'Terjual'),
-            ('canceled', 'Dibatalkan'),
+            ("new", "Baru"),
+            ("offer_received", "Penawaran Diterima"),
+            ("offer_accepted", "Penawaran Diterima"),
+            ("sold", "Terjual"),
+            ("canceled", "Dibatalkan"),
         ],
         string="Status",
         required=True,
         copy=False,
-        default='new'
+        default="new",
     )
     property_type_id = fields.Many2one("estate.property.type", string="Tipe Properti")
-    salesperson_id = fields.Many2one("res.users", string="Pramuniaga", index=True, default=lambda self: self.env.user)
+    salesperson_id = fields.Many2one(
+        "res.users", string="Pramuniaga", index=True, default=lambda self: self.env.user
+    )
     buyer_id = fields.Many2one("res.partner", string="Pembeli", index=True, copy=False)
     tags_ids = fields.Many2many("estate.property.tags", string="Label Properti")
-    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Penawaran")
+    offer_ids = fields.One2many(
+        "estate.property.offer", "property_id", string="Penawaran"
+    )
     total_area = fields.Float(compute="_compute_total_area", string="Total Area")
     best_price = fields.Float(compute="_compute_best_price", string="Penawaran Terbaik")
-    
+
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:
             record.total_area = sum([record.living_area, record.garden_area])
-            
+
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
         for record in self:
@@ -61,3 +70,19 @@ class EstateProperty(models.Model):
                 record.best_price = max(record.offer_ids.mapped("price"))
             else:
                 record.best_price = 0
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        for record in self:
+            if record.garden:
+                record.garden_area = 10
+                record.garden_orientation = "north"
+                return {
+                    "warning": {
+                        "title": "Info",
+                        "message": "Luas Taman dan Orientasi Taman akan terisi otomatis",
+                    }
+                }
+            else:
+                record.garden_area = 0
+                record.garden_orientation = False

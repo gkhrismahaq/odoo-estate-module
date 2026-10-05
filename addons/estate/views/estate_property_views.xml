@@ -81,18 +81,17 @@
                                 <group>
                                     <field name="bedrooms" />
                                     <field name="facades" />
-                                    <field name="garden_orientation" />
                                     <field name="garage" widget="boolean_toggle" />
                                     <field name="active" widget="boolean_toggle" />
                                 </group>
                                 <group>
-                                    <field name="garden" widget="boolean_toggle" />
+                                    <field name="garden" />
+                                    <field name="garden_orientation" />
                                     <label for="garden_area" />
                                     <div class="o_row">
                                         <field name="garden_area" />
                                         <span> m²</span>
                                     </div>
-
                                     <label for="living_area" />
                                     <div class="o_row">
                                         <field name="living_area" />
