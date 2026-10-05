@@ -101,6 +101,9 @@
                             <separator string="Keterangan Lengkap" />
                             <field name="description" placeholder="Tulis detail properti di sini..." />
                         </page>
+                        <page string="Penawaran">
+                            <field name="offer_ids" />
+                        </page>
                         <page string="Info Lainnya">
                             <group>
                                 <field name="salesperson_id" />
