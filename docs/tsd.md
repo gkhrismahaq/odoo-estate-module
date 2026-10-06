@@ -1,8 +1,15 @@
-# Dokumen Spesifikasi Sistem
+# Odoo Estate Booking — System Specification Document (TSD)
 
-**Modul:** estate_booking  
-**Tanggal:** 06 Oktober 2026  
-**Status:** Active  
+| Field              | Value                                         |
+|--------------------|-----------------------------------------------|
+| **Document ID**    | ODOO-ESTATE-TSD-01                            |
+| **Version**        | 1.0                                           |
+| **Status**         | Active                                        |
+| **Effective Date** | 2026-10-06                                    |
+| **Authors**        | Gilang Khrismahaq                             |
+
+**Tujuan Dokumen:**
+Dokumen ini merupakan Single Source of Truth (SSOT) yang merincikan spesifikasi teknis dan fungsional dari modul `estate_booking` dalam ekosistem Odoo 17. Dokumen ini menjadi rujukan utama bagi penyusunan roadmap dan pelaksanaan metode *Spec-Driven Development*.
 
 ---
 

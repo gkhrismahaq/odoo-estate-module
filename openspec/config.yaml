@@ -1,0 +1,128 @@
+schema: spec-driven
+
+# ==============================================================================
+# PROJECT CONTEXT — ODOO ESTATE BOOKING
+# ==============================================================================
+# This is the implementation repository for Odoo 17 Custom ERP.
+# NO code change may begin without an approved OpenSpec proposal.
+# ==============================================================================
+
+context: |
+  Project Name  : Odoo Estate Booking
+  Description   : Property Management & E-Commerce Integration System.
+  App Platform  : Odoo 17 (Python Backend, QWeb Frontend, PostgreSQL).
+  Methodology   : Spec-Driven Development (OpenSpec).
+
+  SSOT Docs : /Users/gilangkhrismahaq/Learn/odoo_17_module_dev/docs
+  Impl Repo : /Users/gilangkhrismahaq/Learn/odoo_17_module_dev
+
+  System Roles:
+  - Agen Properti (Internal) : Full CRUD access to estate models.
+  - Klien (Portal) : Read-only access to their own bookings and invoices.
+  - Pengunjung (Public) : Read-only access to property catalog web pages.
+
+  # ============================================================================
+  # SSOT DOCUMENT MAP (READ BEFORE STARTING ANY CHANGE)
+  # ============================================================================
+
+  Core Blueprints (in docs/):
+  - tsd.md      Business & Technical Specs (BRD, FSD, TSD).
+  - roadmap.md            Master plan for all changes and capabilities.
+
+  # ============================================================================
+  # HARD TECHNICAL CONSTRAINTS
+  # ============================================================================
+
+  1. MUST follow Odoo 17 standards (ORM, QWeb, XML Views, Controllers).
+  2. MUST inherit existing models safely (estate.property) without breaking existing fields.
+  3. Security rules MUST be defined strictly in ir.model.access.csv and security.xml.
+  4. Payment integration MUST leverage Odoo's native `payment` module architecture.
+
+  # ============================================================================
+  # ARTIFACT WORKFLOW
+  # ============================================================================
+  # Every change MUST produce 4 ordered artifacts inside its folder:
+  # openspec/changes/{change-name}/
+  #
+  # 1. proposal.md
+  # 2. specs/spec.md
+  # 3. design.md
+  # 4. tasks.md
+  # ============================================================================
+
+rules:
+
+  proposal:
+    - |
+      REQUIRED FORMAT for proposal.md:
+      All headings in English. Body content in Indonesian.
+
+      ## Why
+      [Business problem or technical need]
+      > **Reference:** [Document Name](path) — Section.
+
+      ## What Changes
+      [List of changes]
+
+      ## Capabilities
+      ### New / Modified / Removed Capabilities
+
+      ## Impact
+      - **Files created:**
+      - **Files modified:**
+      - **SSOT documents referenced:**
+
+      **Estimated effort:** X hours.
+
+  specs:
+    - |
+      REQUIRED FORMAT for specs/{capability-name}/spec.md:
+      All headings in English. Body content in Indonesian.
+
+      ## Purpose
+      [Explanation of capability]
+
+      ## ADDED Requirements
+      ### Requirement: {Requirement Name}
+      The system MUST [clause].
+      > **Reference:** [Document Name](path)
+      
+      #### Scenario: {Scenario Name}
+      - **WHEN** [condition]
+      - **THEN** [outcome]
+
+  design:
+    - |
+      REQUIRED FORMAT for design.md:
+      All headings in English. Body content in Indonesian.
+
+      ## Context
+      [Technical and business background]
+
+      ## Goals / Non-Goals
+      [List of outcomes and excluded items]
+
+      ## Decisions
+      ### 1. {Decision Title}
+      - **Rationale:** [Why]
+      - **Alternatives Considered:** [Other options]
+
+      ## Risks / Trade-offs
+      [Risks and mitigation]
+
+  tasks:
+    - |
+      REQUIRED FORMAT for tasks.md:
+      All headings in English. Body content in Indonesian.
+
+      ## {Number}. {Phase Name}
+      - [ ] {Number}.{Sub} {Task description.}
+
+    - Every task MUST represent less than 2 hours of effort.
+    - During apply, update `- [ ]` to `- [x]` after completing each task sequentially.
+
+operations:
+  apply:
+    guidance:
+      - Implementation MUST follow tasks.md in sequential order.
+      - MUST NOT add logic not present in spec.md or design.md.
