@@ -1,5 +1,6 @@
 from odoo import _, fields, models, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 from dateutil.relativedelta import relativedelta
 
 
@@ -106,6 +107,24 @@ class EstateProperty(models.Model):
                 raise UserError("Properti yang sudah dibatalkan tidak bisa terjual")
             record.status = "sold"
         return True
+
+    @api.constrains("expected_price", "selling_price")
+    def _check_selling_price(self):
+        for record in self:
+            if float_is_zero(record.selling_price, precision_digits=2):
+                continue
+
+            ninety_percent_expected = record.expected_price * 0.90
+
+            if (
+                float_compare(
+                    record.selling_price, ninety_percent_expected, precision_digits=2
+                )
+                < 0
+            ):
+                raise ValidationError(
+                    "Harga Jual tidak boleh lebih rendah dari 90% Harga Harapan"
+                )
 
     def action_cancel(self):
         for record in self:
