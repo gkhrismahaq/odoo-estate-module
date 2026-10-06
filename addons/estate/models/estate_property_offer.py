@@ -6,6 +6,9 @@ from datetime import timedelta
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate Property Offer"
+    _sql_constraints = [
+        ("check_price", "CHECK(price > 0)", "Harga Penawaran harus lebih dari 0"),
+    ]
 
     price = fields.Float()
     status = fields.Selection(

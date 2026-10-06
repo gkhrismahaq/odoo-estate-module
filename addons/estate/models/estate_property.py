@@ -6,6 +6,18 @@ from dateutil.relativedelta import relativedelta
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate Property"
+    _sql_constraints = [
+        (
+            "check_expected_price",
+            "CHECK(expected_price > 0)",
+            "Harga Harapan harus lebih dari 0",
+        ),
+        (
+            "check_selling_price",
+            "CHECK(selling_price >= 0)",
+            "Harga Jual harus angka positif atau 0",
+        ),
+    ]
 
     name = fields.Char(string="Nama", required=True)
     description = fields.Text(string="Deskripsi")
