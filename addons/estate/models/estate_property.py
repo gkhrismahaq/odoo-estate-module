@@ -11,7 +11,7 @@ class EstateProperty(models.Model):
         (
             "check_expected_price",
             "CHECK(expected_price > 0)",
-            "Harga Harapan harus lebih dari 0",
+            "Harga Bukaan harus lebih dari 0",
         ),
         (
             "check_selling_price",
@@ -28,7 +28,7 @@ class EstateProperty(models.Model):
         copy=False,
         default=lambda self: fields.Date.today() + relativedelta(months=3),
     )
-    expected_price = fields.Float(string="Harga Harapan", required=True)
+    expected_price = fields.Float(string="Harga Bukaan", required=True)
     selling_price = fields.Float(string="Harga Jual", readonly=True, copy=False)
     bedrooms = fields.Integer(string="Kamar Tidur", default=2)
     living_area = fields.Integer(string="Luas Bangunan")
@@ -123,7 +123,7 @@ class EstateProperty(models.Model):
                 < 0
             ):
                 raise ValidationError(
-                    "Harga Jual tidak boleh lebih rendah dari 90% Harga Harapan"
+                    "Harga Jual tidak boleh lebih rendah dari 90% Harga Bukaan"
                 )
 
     def action_cancel(self):
