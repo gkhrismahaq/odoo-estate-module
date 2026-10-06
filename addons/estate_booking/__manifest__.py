@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "Estate Booking",
+    "version": "1.0",
+    "summary": "Property Management & E-Commerce Integration System",
+    "description": """
+        Modul Estate Booking untuk integrasi antara modul estate, website, payment, dan account.
+        Memfasilitasi klien untuk memesan properti dan melunasi cicilan.
+    """,
+    "author": "Gilang Khrismahaq",
+    "category": "Sales",
+    "depends": [
+        "estate",
+        "website",
+        "payment",
+        "account",
+    ],
+    "data": [],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+    "license": "LGPL-3",
+}
