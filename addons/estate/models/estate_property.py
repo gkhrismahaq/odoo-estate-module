@@ -93,11 +93,11 @@ class EstateProperty(models.Model):
             if record.status == "canceled":
                 raise UserError("Properti yang sudah dibatalkan tidak bisa terjual")
             record.status = "sold"
-            return True
+        return True
 
     def action_cancel(self):
         for record in self:
             if record.status == "sold":
                 raise UserError("Properti yang sudah terjual tidak bisa dibatalkan")
             record.status = "canceled"
-            return True
+        return True
